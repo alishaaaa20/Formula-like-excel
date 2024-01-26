@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Excel-Like Sheet</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 60%;
+        margin: 20px auto;
+      }
+
+      th,
+      td {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      #formulaInput {
+        font-weight: bold;
+      }
+
+      #resultCell {
+        background-color: #e6f7ff;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Column 1</th>
+          <th>Column 2</th>
+          <th>Column 3</th>
+          <th>Formula Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="number" id="cell11" /></td>
+          <td><input type="number" id="cell12" /></td>
+          <td><input type="number" id="cell13" /></td>
+          <td><input type="text" id="formulaInput" readonly /></td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+
+    <script>
+      function updateFormulaResult(row) {
+        const cell1 =
+          parseFloat(document.getElementById(`cell${row}1`).value) || 0;
+        const cell2 =
+          parseFloat(document.getElementById(`cell${row}2`).value) || 0;
+        const cell3 =
+          parseFloat(document.getElementById(`cell${row}3`).value) || 0;
+
+        const result = cell1 + cell2 - cell3;
+
+        document.getElementById(`formulaInput${row}`).value = result;
+      }
+
+      for (let row = 1; row <= 1; row++) {
+        for (let col = 1; col <= 3; col++) {
+          const cellInput = document.getElementById(`cell${row}${col}`);
+          cellInput.addEventListener("input", () => updateFormulaResult(row));
+        }
+      }
+    </script>
+  </body>
+</html>
